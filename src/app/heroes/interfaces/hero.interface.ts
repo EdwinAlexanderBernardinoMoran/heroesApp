@@ -5,6 +5,7 @@ export interface Hero {
   superhero:        string;
   publisher:        Publisher;
   alter_ego:        string;
+  alter_image?:      string;
   first_appearance: string;
   characters:       string;
 }
