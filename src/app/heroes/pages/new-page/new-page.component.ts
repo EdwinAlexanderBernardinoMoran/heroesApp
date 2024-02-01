@@ -12,7 +12,7 @@ export class NewPageComponent {
 
   public heroForm = new FormGroup({
     id:               new FormControl<string>(''),
-    superhero:        new FormControl<string>(''),
+    superhero:        new FormControl<string>('', {nonNullable: true}),
     publisher:        new FormControl<Publisher>(Publisher.DCComics),
     alter_ego:        new FormControl(''),
     first_appearance: new FormControl(''),
@@ -24,5 +24,18 @@ export class NewPageComponent {
     {id: 'DC Comics', desc: 'Dc - Comics'},
     {id: 'Marvel Comics', desc: 'Marvel - Comics'},
   ]
+
+  onSubmit():void {
+    console.log({
+      formIsValid: this.heroForm.valid,
+
+      // Regresa todos los valores sin importar si estan habilitados
+      // value: this.heroForm.getRawValue()
+
+      // Regresa todos los valores del formulario
+      value: this.heroForm.value
+    }
+    );
+  }
 
 }
