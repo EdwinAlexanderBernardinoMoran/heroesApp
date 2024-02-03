@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Publisher } from '../../interfaces/hero.interface';
+import { Hero, Publisher } from '../../interfaces/hero.interface';
+import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-new-page',
@@ -25,7 +26,19 @@ export class NewPageComponent {
     {id: 'Marvel Comics', desc: 'Marvel - Comics'},
   ]
 
+  constructor(private heroService: HeroesService){}
+
+  get currentHero(): Hero {
+    // Trata este form como un heroe
+    const hero = this.heroForm.value as Hero
+    return hero;
+  }
+
   onSubmit():void {
+
+    if (this.heroForm.invalid) return;
+
+    // this.heroService.updateHero(this.heroForm.value); no es valido ya que no cumple con la interfaz, se soluciona creando un get
     console.log({
       formIsValid: this.heroForm.valid,
 

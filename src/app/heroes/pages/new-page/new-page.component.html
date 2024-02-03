@@ -49,7 +49,12 @@
   </div>
   <div class="col-12 sm:col-6">
     <mat-card>
-      <img [src]="" alt="imagen del heroes" matCardImage>
+      <img [src]="currentHero | heroImage" alt="imagen del heroes" mat-card-image>
     </mat-card>
   </div>
 </div>
+
+<pre>
+
+  {{ currentHero | json }}
+</pre>
