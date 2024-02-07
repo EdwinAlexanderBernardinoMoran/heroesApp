@@ -9,7 +9,7 @@
   "heroes": [
     {
       "id": "dc-batman",
-      "superhero": "Batman",
+      "superhero": "Batman Actualizado",
       "publisher": "Marvel Comics",
       "alter_ego": "Bruce Wayneadfs",
       "first_appearance": "Detective Comics #27",
@@ -168,6 +168,15 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
+    },
+    {
+      "id": "",
+      "superhero": "nuevo",
+      "publisher": "DC Comics",
+      "alter_ego": "nuevo",
+      "first_appearance": "nuevo",
+      "characters": "nuevo",
+      "alt_img": "nuevo"
     }
   ]
 }

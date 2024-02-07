@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-page',
@@ -31,7 +32,8 @@ export class NewPageComponent implements OnInit{
   constructor(
     private heroService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
     ){}
 
   get currentHero(): Hero {
@@ -62,6 +64,7 @@ export class NewPageComponent implements OnInit{
       this.heroService.updateHero(this.currentHero).subscribe(
         hero => {
           // TODO: mostrar snackbar
+          this.showSnackbar(`${ hero.superhero } updated!`);
         }
       );
       return
@@ -69,6 +72,8 @@ export class NewPageComponent implements OnInit{
 
     this.heroService.addHero(this.currentHero).subscribe(hero => {
       // TODO: mostrat nackbar, y navegar a /heroes/edit/hero.id
+      this.router.navigate(['/heroes/edit', hero.id]);
+      this.showSnackbar(`${ hero.superhero } created!`);
     })
 
     // this.heroService.updateHero(this.heroForm.value); no es valido ya que no cumple con la interfaz, se soluciona creando un get
@@ -82,6 +87,12 @@ export class NewPageComponent implements OnInit{
       value: this.heroForm.value
     }
     );
+  }
+
+  showSnackbar(message: string): void{
+    this.snackbar.open(message, 'done', {
+      duration: 2500
+    })
   }
 
 }
