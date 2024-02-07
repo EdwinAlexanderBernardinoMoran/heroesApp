@@ -40,6 +40,20 @@ export class NewPageComponent implements OnInit{
     return hero;
   }
 
+  ngOnInit(): void {
+    if (!this.router.url.includes('edit')) return
+
+    this.activatedRoute.params.pipe(
+      switchMap(({id}) => this.heroService.getHeroById(id)),
+    ).subscribe( hero => {
+      if (!hero) return this.router.navigateByUrl('/');
+      console.log(hero);
+
+      this.heroForm.reset(hero);
+      return
+    })
+  }
+
   onSubmit():void {
 
     if (this.heroForm.invalid) return;
