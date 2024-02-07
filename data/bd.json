@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "usuario": "John Doe",
       "email": "john.due@gmail.com"
     }
@@ -10,10 +10,11 @@
     {
       "id": "dc-batman",
       "superhero": "Batman",
-      "publisher": "DC Comics",
-      "alter_ego": "Bruce Wayne",
+      "publisher": "Marvel Comics",
+      "alter_ego": "Bruce Wayneadfs",
       "first_appearance": "Detective Comics #27",
-      "characters": "Bruce Wayne"
+      "characters": "Bruce Wayne",
+      "alt_img": "sds"
     },
     {
       "id": "dc-superman",
@@ -157,7 +158,8 @@
       "publisher": "Marvel Comics",
       "alter_ego": "Scott Summers",
       "first_appearance": "X-Men #1",
-      "characters": "Scott Summers"
+      "characters": "Scott Summers",
+      "alt_img": "sg"
     },
     {
       "id": "marvel-silver",
