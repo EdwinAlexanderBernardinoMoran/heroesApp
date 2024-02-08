@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { switchMap } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter, switchMap, tap } from 'rxjs';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-new-page',
@@ -33,7 +37,8 @@ export class NewPageComponent implements OnInit{
     private heroService: HeroesService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
     ){}
 
   get currentHero(): Hero {
@@ -87,6 +92,37 @@ export class NewPageComponent implements OnInit{
       value: this.heroForm.value
     }
     );
+  }
+
+  onDelete(){
+    if (!this.currentHero.id) throw Error('Hero id is required')
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: this.heroForm.value
+    });
+
+    dialogRef.afterClosed().pipe(
+      filter((result: boolean) => result),
+      // tap(result => console.log({result})
+      // )
+      switchMap( () => this.heroService.deleteHero(this.currentHero.id)),
+      filter((wasDeleted: boolean) => wasDeleted)
+      // tap(wasDelete => console.log({wasDelete})
+      // )
+    ).subscribe(result => {
+      this.router.navigate(['/heroes']);
+    })
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (!result) return
+    //   console.log('deleted');
+    //   this.heroService.deleteHero(this.currentHero.id).subscribe(
+    //     wasDelete => {
+    //       if (wasDelete)
+    //       this.router.navigate(['/heroes']);
+    //     }
+    //   );
+    // });
   }
 
   showSnackbar(message: string): void{
