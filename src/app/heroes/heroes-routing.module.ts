@@ -27,7 +27,7 @@ const routes: Routes = [
         path: ':id', component: HeroPageComponent
       },
       {
-        path: '**', redirectTo: 'lists'
+        path: '**', redirectTo: 'list'
       }
     ]
   }
